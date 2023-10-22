@@ -18,9 +18,10 @@ public class Main {
 
         System.out.println(dictionary.addWord("en","dog","Пёс"));
         System.out.println(dictionary.addWord("en","dog","Собака"));
+        System.out.println(dictionary.addWord("en","doggy","Собачка"));
         dictionary.printWordsLang("en");
         dictionary.searchTranslateWord("en","dog");
-        dictionary.searchTranslateIncompleteWord("en","dog");
+        dictionary.searchTranslateIncompleteWord("en","do");
     }
 }
 
@@ -123,7 +124,8 @@ class Dictionary {
         int count = 1;
         lang = lang.toLowerCase();
         key = key.toLowerCase();
-        System.out.print(key + ": ");
+
+        System.out.print("\n"+key + ": ");
         for (String word: dictionary.get(lang).get(key)) {
             if(count !=1){
                 System.out.print(", ");
@@ -139,7 +141,9 @@ class Dictionary {
         lang = lang.toLowerCase();
         System.out.println();
         for (String str: dictionary.get(lang).keySet()) {
-            System.out.println(str);
+            if(str.contains(key)){
+                searchTranslateWord(lang, str);
+            }
         }
     }
 }
