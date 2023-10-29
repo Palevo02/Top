@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="MillionerOOP">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/MillionerOOP.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
