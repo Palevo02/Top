@@ -110,7 +110,7 @@ class Menu {
                         lang = userInputString(scanner);
                         System.out.println("Введите слово:");
                         word = userInputString(scanner);
-                        dictionary.searchUnknown(lang,word);
+                        dictionary.searchUnknown(lang, word);
                 }
             } catch (Exception ex) {
                 System.err.println("Ошибка ввода");
@@ -191,8 +191,8 @@ class Dictionary {
             if (dictionary.get(lang).containsKey(key)) {
                 List<String> arr = dictionary.get(lang).get(key);
                 List<String> arrNew = checkList(arr, arrWords);
-                if(arr.size()!= arrNew.size()){
-                    dictionary.get(lang).put(key,arrNew);
+                if (arr.size() != arrNew.size()) {
+                    dictionary.get(lang).put(key, arrNew);
                     return true;
                 }
                 return false;
@@ -333,8 +333,8 @@ class Dictionary {
         key = key.toLowerCase();
         lang = lang.toLowerCase();
         System.out.println();
-        for (String keyLang: dictionary.keySet()) {
-            if(lang.equals(keyLang)){
+        for (String keyLang : dictionary.keySet()) {
+            if (lang.equals(keyLang)) {
                 count++;
                 for (String str : dictionary.get(lang).keySet()) {
                     if (str.contains(key)) {
@@ -343,35 +343,32 @@ class Dictionary {
                 }
             }
         }
-        if(count == 1){
+        if (count == 1) {
             System.out.println("Такого языка нет");
         }
     }
-    public void searchUnknown(String lang, String key){
+    public void searchUnk(String lang, String key){
+
+    }
+
+    public void searchUnknown(String lang, String key) {
         key = key.toLowerCase();
         lang = lang.toLowerCase();
-        int count = 1;
-        int i = 0;
-        int j = 0;
-
-        char [] keyArr = key.toCharArray();
+        int count = 0, i = 0, j = 0;
+        char[] keyArr = key.toCharArray();
         boolean isCorrect = false;
         System.out.println();
-        for (String word: dictionary.get(lang).keySet()) {
-            for( ; i< word.length();){
-                if( j <= key.length()-1 ){
-                    if( key.charAt(j) == word.charAt(i) ){
+        for (String word : dictionary.get(lang).keySet()) {
+            for (; i < word.length(); ) {
+                if (j <= key.length() - 1) {
+                    if (key.charAt(j) == word.charAt(i)) {
                         isCorrect = true;
                         j++;
-
-                    } else if(key.charAt(j) == '*' ){
+                    } else if (key.charAt(j) == '*') {
                         isCorrect = true;
-
-
-                    } else if (key.charAt(j)== '_'){
+                    } else if (key.charAt(j) == '_') {
                         isCorrect = true;
                         j++;
-
                     } else {
                         isCorrect = false;
                         break;
@@ -382,22 +379,23 @@ class Dictionary {
                     break;
                 }
             }
+            check(isCorrect,lang,key,word,i,j);
+            i = j = 0;
+        }
+    }
 
-            if(isCorrect && j >= key.length() || j+1 == key.length()){
-                System.out.print(word + ": ");
-                for (String tr: dictionary.get(lang).get(word)) {
-                    if (count != 1) {
-                        System.out.print(", ");
-                    }
-                    System.out.print(tr);
-                    count++;
+    private void check(boolean isCorrect, String lang, String key,String word, int i, int j) {
+        int count = 0;
+        if (isCorrect && j >= key.length() || j + 1 == key.length()) {
+            System.out.print(word + ": ");
+            for (String tr : dictionary.get(lang).get(word)) {
+                if (count != 0) {
+                    System.out.print(", ");
                 }
-                count = 1;
-                System.out.println();
+                System.out.print(tr);
+                count++;
             }
-            i = j= 0;
-
-
+            System.out.println();
         }
     }
 }
