@@ -347,7 +347,8 @@ class Dictionary {
             System.out.println("Такого языка нет");
         }
     }
-    public void searchUnk(String lang, String key){
+
+    public void searchUnk(String lang, String key) {
 
     }
 
@@ -364,8 +365,14 @@ class Dictionary {
                     if (key.charAt(j) == word.charAt(i)) {
                         isCorrect = true;
                         j++;
+                    } else if ( j < key.length()-1&&key.charAt(j + 1) == word.charAt(i)) {
+                        isCorrect = true;
+                        j++;
                     } else if (key.charAt(j) == '*') {
                         isCorrect = true;
+                        /*if(key.charAt(j+1) == word.charAt(i)){
+                            System.out.println("puk");
+                        }*/
                     } else if (key.charAt(j) == '_') {
                         isCorrect = true;
                         j++;
@@ -379,12 +386,12 @@ class Dictionary {
                     break;
                 }
             }
-            check(isCorrect,lang,key,word,i,j);
+            check(isCorrect, lang, key, word, i, j);
             i = j = 0;
         }
     }
 
-    private void check(boolean isCorrect, String lang, String key,String word, int i, int j) {
+    private void check(boolean isCorrect, String lang, String key, String word, int i, int j) {
         int count = 0;
         if (isCorrect && j >= key.length() || j + 1 == key.length()) {
             System.out.print(word + ": ");
